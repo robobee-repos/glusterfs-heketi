@@ -5,7 +5,7 @@
 * vars.heketi.image.version
 * vars.heketi.snapshot.limit
 */
-grafana-service-yaml(parent, vars) ::= <<
+heketi-deployment-yaml(parent, vars) ::= <<
 ---
 kind: Service
 apiVersion: v1

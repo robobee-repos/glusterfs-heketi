@@ -4,7 +4,7 @@
 * vars.gluster.image.name
 * vars.gluster.image.version
 */
-grafana-service-yaml(parent, vars) ::= <<
+glusterfs-daemonset-yaml(parent, vars) ::= <<
 ---
 kind: DaemonSet
 apiVersion: extensions/v1beta1

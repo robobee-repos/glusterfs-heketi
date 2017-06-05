@@ -11,7 +11,7 @@
 * tolerations.toleration.key
 * tolerations.toleration.value
 */
-grafana-service-yaml(parent, vars) ::= <<
+deploy-heketi-deployment-yaml(parent, vars) ::= <<
 ---
 kind: Service
 apiVersion: v1
