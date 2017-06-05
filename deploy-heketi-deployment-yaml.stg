@@ -7,9 +7,9 @@
 * 
 * Optional
 * 
-* tolerations.toleration.effect
-* tolerations.toleration.key
-* tolerations.toleration.value
+* tolerations[].effect
+* tolerations[].key
+* tolerations[].value
 */
 deploy-heketi-deployment-yaml(parent, vars) ::= <<
 ---
