@@ -1,6 +1,6 @@
 tolerations(parent, vars, tolerations) ::= <<
 <if(tolerations)>      tolerations:
-<tolerations:toleration()><endif>
+<tolerations:toleration();separator="\n"><endif>
 >>
 
 toleration(toleration) ::= <<
