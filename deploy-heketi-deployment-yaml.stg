@@ -11,6 +11,9 @@
 * tolerations[].key
 * tolerations[].value
 */
+
+import "tolerations.stg"
+
 deploy-heketi-deployment-yaml(parent, vars) ::= <<
 ---
 kind: Service

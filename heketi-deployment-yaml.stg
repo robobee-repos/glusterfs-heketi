@@ -4,7 +4,16 @@
 * vars.heketi.image.name
 * vars.heketi.image.version
 * vars.heketi.snapshot.limit
+* 
+* Optional
+* 
+* tolerations[].effect
+* tolerations[].key
+* tolerations[].value
 */
+
+import "tolerations.stg"
+
 heketi-deployment-yaml(parent, vars) ::= <<
 ---
 kind: Service

@@ -3,7 +3,16 @@
 * 
 * vars.gluster.image.name
 * vars.gluster.image.version
+* 
+* Optional
+* 
+* tolerations[].effect
+* tolerations[].key
+* tolerations[].value
 */
+
+import "tolerations.stg"
+
 glusterfs-daemonset-yaml(parent, vars) ::= <<
 ---
 kind: DaemonSet

@@ -1,5 +1,4 @@
 tolerations(parent, vars, tolerations) ::= <<
-tolerations: <tolerations>
 <if(tolerations)>      tolerations:
 <tolerations:toleration()><endif>
 >>
