@@ -81,6 +81,6 @@ spec:
             port: 8080
       volumes:
       - name: db
-<tolerations(parent, vars, vars.heapster.tolerations)>
+<tolerations(parent, vars, vars.tolerations)>
 
 >>

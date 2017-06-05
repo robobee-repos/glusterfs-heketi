@@ -75,6 +75,6 @@ spec:
         glusterfs:
           endpoints: heketi-storage-endpoints
           path: heketidbstorage
-<tolerations(parent, vars, vars.heapster.tolerations)>
+<tolerations(parent, vars, vars.tolerations)>
 
 >>

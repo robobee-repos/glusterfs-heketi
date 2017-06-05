@@ -106,6 +106,6 @@ spec:
       - name: glusterfs-ssl
         hostPath:
           path: "/etc/ssl"
-<tolerations(parent, vars, vars.heapster.tolerations)>
+<tolerations(parent, vars, vars.tolerations)>
 
 >>
