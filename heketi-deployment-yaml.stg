@@ -39,6 +39,7 @@ metadata:
   name: heketi
   labels:
     glusterfs: heketi-deployment
+    robobeerun.com/group: glusterfs-heketi
   annotations:
     description: Defines how to deploy Heketi
 spec:
@@ -48,6 +49,7 @@ spec:
       name: heketi
       labels:
         glusterfs: heketi-pod
+        robobeerun.com/group: glusterfs-heketi
     spec:
       serviceAccountName: heketi-service-account
       containers:
