@@ -22,6 +22,7 @@ metadata:
   name: heketi
   labels:
     glusterfs: heketi-service
+    robobeerun.com/group: glusterfs-heketi
   annotations:
     description: Exposes Heketi Service
 spec:

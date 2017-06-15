@@ -4,6 +4,10 @@
 * vars.heketi.image.name
 * vars.heketi.image.version
 * vars.heketi.snapshot.limit
+* vars.heketi.limits.cpu
+* vars.heketi.limits.memory
+* vars.heketi.requests.cpu
+* vars.heketi.requests.memory
 * 
 * Optional
 * 
@@ -23,6 +27,7 @@ metadata:
   labels:
     glusterfs: heketi-service
     deploy-heketi: support
+    robobeerun.com/group: glusterfs-heketi
   annotations:
     description: Exposes Heketi Service
 spec:
@@ -40,6 +45,7 @@ metadata:
   labels:
     glusterfs: heketi-deployment
     deploy-heketi: heketi-deployment
+    robobeerun.com/group: glusterfs-heketi
   annotations:
     description: Defines how to deploy Heketi
 spec:
@@ -50,12 +56,20 @@ spec:
       labels:
         name: deploy-heketi
         glusterfs: heketi-pod
+        robobeerun.com/group: glusterfs-heketi
     spec:
       serviceAccountName: heketi-service-account
       containers:
       - image: <vars.heketi.image.name>:<vars.heketi.image.version>
         imagePullPolicy: IfNotPresent
         name: deploy-heketi
+        resources:
+          limits:
+            cpu: <vars.heketi.limits.cpu>
+            memory: <vars.heketi.limits.memory>
+          requests:
+            cpu: <vars.heketi.requests.cpu>
+            memory: <vars.heketi.requests.memory>
         env:
         - name: HEKETI_EXECUTOR
           value: kubernetes

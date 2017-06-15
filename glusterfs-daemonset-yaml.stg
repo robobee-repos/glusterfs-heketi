@@ -3,7 +3,11 @@
 * 
 * vars.gluster.image.name
 * vars.gluster.image.version
-* 
+* vars.gluster.limits.cpu
+* vars.gluster.limits.memory
+* vars.gluster.requests.cpu
+* vars.gluster.requests.memory
+*
 * Optional
 * 
 * tolerations[].effect
@@ -21,6 +25,7 @@ metadata:
   name: glusterfs
   labels:
     glusterfs: daemonset
+    robobeerun.com/group: glusterfs-heketi
   annotations:
     description: GlusterFS DaemonSet
     tags: glusterfs
@@ -30,6 +35,7 @@ spec:
       name: glusterfs
       labels:
         glusterfs-node: pod
+        robobeerun.com/group: glusterfs-heketi
     spec:
       nodeSelector:
         storagenode: glusterfs
@@ -38,6 +44,13 @@ spec:
       - image: <vars.gluster.image.name>:<vars.gluster.image.version>
         imagePullPolicy: IfNotPresent
         name: glusterfs
+        resources:
+          limits:
+            cpu: <vars.gluster.limits.cpu>
+            memory: <vars.gluster.limits.memory>
+          requests:
+            cpu: <vars.gluster.requests.cpu>
+            memory: <vars.gluster.requests.memory>
         volumeMounts:
         - name: glusterfs-heketi
           mountPath: "/var/lib/heketi"
