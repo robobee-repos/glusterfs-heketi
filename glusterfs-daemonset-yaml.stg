@@ -1,19 +1,19 @@
 /*
-* Mandatory
-* 
-* vars.gluster.image.name
-* vars.gluster.image.version
-* vars.gluster.limits.cpu
-* vars.gluster.limits.memory
-* vars.gluster.requests.cpu
-* vars.gluster.requests.memory
-*
-* Optional
-* 
-* tolerations[].effect
-* tolerations[].key
-* tolerations[].value
-*/
+ * Mandatory
+ * 
+ * vars.gluster.image.name
+ * vars.gluster.image.version
+ * vars.gluster.limits.cpu
+ * vars.gluster.limits.memory
+ * vars.gluster.requests.cpu
+ * vars.gluster.requests.memory
+ *
+ * Optional
+ * 
+ * tolerations[].effect
+ * tolerations[].key
+ * tolerations[].value
+ */
 
 import "tolerations.stg"
 

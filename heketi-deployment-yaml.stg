@@ -1,16 +1,16 @@
 /*
-* Mandatory
-* 
-* vars.heketi.image.name
-* vars.heketi.image.version
-* vars.heketi.snapshot.limit
-* 
-* Optional
-* 
-* tolerations[].effect
-* tolerations[].key
-* tolerations[].value
-*/
+ * Mandatory
+ * 
+ * vars.heketi.image.name
+ * vars.heketi.image.version
+ * vars.heketi.snapshot.limit
+ * 
+ * Optional
+ * 
+ * tolerations[].effect
+ * tolerations[].key
+ * tolerations[].value
+ */
 
 import "tolerations.stg"
 
