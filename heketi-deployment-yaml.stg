@@ -3,6 +3,8 @@
  * 
  * vars.heketi.image.name
  * vars.heketi.image.version
+ * vars.heketi.admin.key
+ * vars.heketi.user.key
  * vars.heketi.snapshot.limit
  * 
  * Optional
@@ -22,6 +24,7 @@ metadata:
   name: heketi
   labels:
     glusterfs: heketi-service
+    heketi: service
     robobeerun.com/group: glusterfs-heketi
   annotations:
     description: Exposes Heketi Service
@@ -39,6 +42,7 @@ metadata:
   name: heketi
   labels:
     glusterfs: heketi-deployment
+    heketi: deployment
     robobeerun.com/group: glusterfs-heketi
   annotations:
     description: Defines how to deploy Heketi
@@ -49,6 +53,7 @@ spec:
       name: heketi
       labels:
         glusterfs: heketi-pod
+        heketi: pod
         robobeerun.com/group: glusterfs-heketi
     spec:
       serviceAccountName: heketi-service-account

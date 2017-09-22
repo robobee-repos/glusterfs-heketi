@@ -3,6 +3,8 @@
  * 
  * vars.heketi.image.name
  * vars.heketi.image.version
+ * vars.heketi.admin.key
+ * vars.heketi.user.key
  * vars.heketi.snapshot.limit
  * vars.heketi.limits.cpu
  * vars.heketi.limits.memory
@@ -26,13 +28,13 @@ metadata:
   name: deploy-heketi
   labels:
     glusterfs: heketi-service
-    deploy-heketi: support
+    deploy-heketi: service
     robobeerun.com/group: glusterfs-heketi
   annotations:
     description: Exposes Heketi Service
 spec:
   selector:
-    name: deploy-heketi
+    deploy-heketi: pod
   ports:
   - name: deploy-heketi
     port: 8080
@@ -44,7 +46,7 @@ metadata:
   name: deploy-heketi
   labels:
     glusterfs: heketi-deployment
-    deploy-heketi: heketi-deployment
+    deploy-heketi: deployment
     robobeerun.com/group: glusterfs-heketi
   annotations:
     description: Defines how to deploy Heketi
@@ -56,6 +58,7 @@ spec:
       labels:
         name: deploy-heketi
         glusterfs: heketi-pod
+        deploy-heketi: pod
         robobeerun.com/group: glusterfs-heketi
     spec:
       serviceAccountName: heketi-service-account
