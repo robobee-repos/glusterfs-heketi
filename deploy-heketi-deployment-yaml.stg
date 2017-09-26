@@ -74,10 +74,14 @@ spec:
             cpu: <vars.heketi.requests.cpu>
             memory: <vars.heketi.requests.memory>
         env:
+        - name: HEKETI_USER_KEY
+          value: ${HEKETI_USER_KEY}
+        - name: HEKETI_ADMIN_KEY
+          value: ${HEKETI_ADMIN_KEY}
         - name: HEKETI_EXECUTOR
-          value: kubernetes
+          value: ${HEKETI_EXECUTOR}
         - name: HEKETI_FSTAB
-          value: "/var/lib/heketi/fstab"
+          value: ${HEKETI_FSTAB}
         - name: HEKETI_SNAPSHOT_LIMIT
           value: '<vars.heketi.snapshot.limit>'
         - name: HEKETI_KUBE_GLUSTER_DAEMONSET
@@ -87,6 +91,8 @@ spec:
         volumeMounts:
         - name: db
           mountPath: "/var/lib/heketi"
+        - name: config
+          mountPath: /etc/heketi
         readinessProbe:
           timeoutSeconds: 3
           initialDelaySeconds: 3
@@ -101,6 +107,9 @@ spec:
             port: 8080
       volumes:
       - name: db
+      - name: config
+        secret:
+          secretName: heketi-config-secret
 <tolerations(parent, vars, vars.tolerations)>
 
 >>
