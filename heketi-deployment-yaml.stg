@@ -101,6 +101,6 @@ spec:
       - name: config
         secret:
           secretName: heketi-config-secret
-<tolerations(parent, vars, vars.tolerations)>
+<tolerationsGroup(parent, vars, vars.tolerations)>
 
 >>
