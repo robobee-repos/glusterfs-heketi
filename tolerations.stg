@@ -1,11 +1,22 @@
-tolerations(parent, vars, tolerations) ::= <<
+/*
+ * Mandatory:
+ *
+ * tolerations[].effect
+ * tolerations[].key
+ *
+ * Optional:
+ *
+ * tolerations[].value
+ */
+
+tolerationsGroup(parent, vars, tolerations) ::= <<
 <if(tolerations)>      tolerations:
-<tolerations:toleration();separator="\n"><endif>
+<tolerations:toleration()><endif>
 >>
 
 toleration(toleration) ::= <<
-        - effect: <toleration.effect>
-          key: <toleration.key>
-          operator: Equal<if(toleration.value)>
-          value: <toleration.value><endif>
+      - effect: <toleration.effect>
+        key: <toleration.key>
+        operator: <if(toleration.value)>Equal<else>Exists<endif>
+<if(toleration.value)>        value: <toleration.value><endif>
 >>

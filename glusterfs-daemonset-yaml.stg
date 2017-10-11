@@ -1,19 +1,19 @@
 /*
-* Mandatory
-* 
-* vars.gluster.image.name
-* vars.gluster.image.version
-* vars.gluster.limits.cpu
-* vars.gluster.limits.memory
-* vars.gluster.requests.cpu
-* vars.gluster.requests.memory
-*
-* Optional
-* 
-* tolerations[].effect
-* tolerations[].key
-* tolerations[].value
-*/
+ * Mandatory
+ * 
+ * vars.gluster.image.name
+ * vars.gluster.image.version
+ * vars.gluster.limits.cpu
+ * vars.gluster.limits.memory
+ * vars.gluster.requests.cpu
+ * vars.gluster.requests.memory
+ *
+ * Optional
+ * 
+ * tolerations[].effect
+ * tolerations[].key
+ * tolerations[].value
+ */
 
 import "tolerations.stg"
 
@@ -34,6 +34,7 @@ spec:
     metadata:
       name: glusterfs
       labels:
+        glusterfs: pod
         glusterfs-node: pod
         robobeerun.com/group: glusterfs-heketi
     spec:
@@ -44,6 +45,13 @@ spec:
       - image: <vars.gluster.image.name>:<vars.gluster.image.version>
         imagePullPolicy: IfNotPresent
         name: glusterfs
+        env:
+        - name: GB_GLFS_LRU_COUNT
+          value: "15"
+        - name: TCMU_LOGDIR
+          value: "/var/log/glusterfs/gluster-block"
+        - name: GB_LOGDIR
+          value: "/var/log/glusterfs/gluster-block"
         resources:
           limits:
             cpu: <vars.gluster.limits.cpu>
@@ -52,6 +60,8 @@ spec:
             cpu: <vars.gluster.requests.cpu>
             memory: <vars.gluster.requests.memory>
         volumeMounts:
+        - name: glusterfs-block
+          mountPath: "/etc/target"
         - name: glusterfs-heketi
           mountPath: "/var/lib/heketi"
         - name: glusterfs-run
@@ -80,26 +90,23 @@ spec:
         readinessProbe:
           timeoutSeconds: 3
           initialDelaySeconds: 40
-          exec:
-            command:
-            - "/bin/bash"
-            - "-c"
-            - systemctl status glusterd.service
-          periodSeconds: 25
+          tcpSocket:
+            port: 24007
+          periodSeconds: 10
           successThreshold: 1
           failureThreshold: 15
         livenessProbe:
           timeoutSeconds: 3
           initialDelaySeconds: 40
-          exec:
-            command:
-            - "/bin/bash"
-            - "-c"
-            - systemctl status glusterd.service
+          tcpSocket:
+            port: 24007
           periodSeconds: 25
           successThreshold: 1
           failureThreshold: 15
       volumes:
+      - name: glusterfs-block
+        hostPath:
+          path: "/etc/target"
       - name: glusterfs-heketi
         hostPath:
           path: "/var/lib/heketi"
@@ -128,6 +135,6 @@ spec:
       - name: glusterfs-ssl
         hostPath:
           path: "/etc/ssl"
-<tolerations(parent, vars, vars.tolerations)>
+<tolerationsGroup(parent, vars, vars.tolerations)>
 
 >>
