@@ -4,6 +4,10 @@
 * vars.heketi.image.name
 * vars.heketi.image.version
 * vars.heketi.snapshot.limit
+* vars.heketi.limits.cpu
+* vars.heketi.limits.memory
+* vars.heketi.requests.cpu
+* vars.heketi.requests.memory
 * 
 * Optional
 * 
@@ -56,6 +60,13 @@ spec:
       - image: <vars.heketi.image.name>:<vars.heketi.image.version>
         imagePullPolicy: IfNotPresent
         name: heketi
+        resources:
+          limits:
+            cpu: <vars.heketi.limits.cpu>
+            memory: <vars.heketi.limits.memory>
+          requests:
+            cpu: <vars.heketi.requests.cpu>
+            memory: <vars.heketi.requests.memory>
         env:
         - name: HEKETI_EXECUTOR
           value: kubernetes
