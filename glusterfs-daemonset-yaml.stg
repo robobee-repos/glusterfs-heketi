@@ -10,12 +10,17 @@
  *
  * Optional
  * 
- * tolerations[].effect
- * tolerations[].key
- * tolerations[].value
+ * vars.gluster.allowOnMaster
+ * vars.gluster.affinity.key
+ * vars.gluster.affinity.name
+ * vars.gluster.affinity.required
+ * vars.gluster.tolerations[].effect
+ * vars.gluster.tolerations[].key
+ * vars.gluster.tolerations[].value
  */
 
-import "tolerations.stg"
+import "_affinities.stg"
+import "_tolerations.stg"
 
 glusterfs-daemonset-yaml(parent, vars) ::= <<
 ---
@@ -50,8 +55,6 @@ spec:
           value: "15"
         - name: TCMU_LOGDIR
           value: "/var/log/glusterfs/gluster-block"
-        - name: GB_LOGDIR
-          value: "/var/log/glusterfs/gluster-block"
         resources:
           limits:
             cpu: <vars.gluster.limits.cpu>
@@ -60,8 +63,6 @@ spec:
             cpu: <vars.gluster.requests.cpu>
             memory: <vars.gluster.requests.memory>
         volumeMounts:
-        - name: glusterfs-block
-          mountPath: "/etc/target"
         - name: glusterfs-heketi
           mountPath: "/var/lib/heketi"
         - name: glusterfs-run
@@ -84,29 +85,35 @@ spec:
         - name: glusterfs-ssl
           mountPath: "/etc/ssl"
           readOnly: true
+        - name: kernel-modules
+          mountPath: "/usr/lib/modules"
+          readOnly: true
         securityContext:
           capabilities: {}
           privileged: true
         readinessProbe:
           timeoutSeconds: 3
           initialDelaySeconds: 40
-          tcpSocket:
-            port: 24007
-          periodSeconds: 10
+          exec:
+            command:
+            - "/bin/bash"
+            - "-c"
+            - systemctl status glusterd.service
+          periodSeconds: 25
           successThreshold: 1
-          failureThreshold: 15
+          failureThreshold: 50
         livenessProbe:
           timeoutSeconds: 3
           initialDelaySeconds: 40
-          tcpSocket:
-            port: 24007
+          exec:
+            command:
+            - "/bin/bash"
+            - "-c"
+            - systemctl status glusterd.service
           periodSeconds: 25
           successThreshold: 1
-          failureThreshold: 15
+          failureThreshold: 50
       volumes:
-      - name: glusterfs-block
-        hostPath:
-          path: "/etc/target"
       - name: glusterfs-heketi
         hostPath:
           path: "/var/lib/heketi"
@@ -135,6 +142,18 @@ spec:
       - name: glusterfs-ssl
         hostPath:
           path: "/etc/ssl"
-<tolerationsGroup(parent, vars, vars.tolerations)>
+      - name: kernel-modules
+        hostPath:
+          path: "/usr/lib/modules"
+      tolerations:
+        - key: "CriticalAddonsOnly"
+          operator: "Exists"
+        <tolerationMasterEntry(parent, vars, vars.gluster.allowOnMaster)>
+<if(vars.gluster.tolerations)>
+        <tolerationsEntry(parent, vars, vars.gluster.tolerations)>
+<endif>
+<if(vars.gluster.affinity)>
+      <affinitiesGroup(parent, vars, vars.gluster.affinity)>
+<endif>
 
 >>
