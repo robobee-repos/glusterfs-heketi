@@ -8,6 +8,10 @@
  * vars.heketi.requests.cpu
  * vars.heketi.requests.memory
  * vars.heketi.snapshot.limit
+* vars.heketi.limits.cpu
+* vars.heketi.limits.memory
+* vars.heketi.requests.cpu
+* vars.heketi.requests.memory
  * 
  * Optional
  * 
