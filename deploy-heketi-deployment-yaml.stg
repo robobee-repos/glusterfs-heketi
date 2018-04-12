@@ -71,11 +71,11 @@ spec:
         name: deploy-heketi
         resources:
           limits:
-            cpu: <vars.heketi.limits.cpu>
-            memory: <vars.heketi.limits.memory>
+            <if(vars.heketi.limits.cpu)>cpu: <vars.heketi.limits.cpu><endif>
+            <if(vars.heketi.limits.memory)>memory: <vars.heketi.limits.memory><endif>
           requests:
-            cpu: <vars.heketi.requests.cpu>
-            memory: <vars.heketi.requests.memory>
+            <if(vars.heketi.requests.cpu)>cpu: <vars.heketi.requests.cpu><endif>
+            <if(vars.heketi.requests.memory)>memory: <vars.heketi.requests.memory><endif>
         env:
         - name: HEKETI_USER_KEY
           value: ${HEKETI_USER_KEY}

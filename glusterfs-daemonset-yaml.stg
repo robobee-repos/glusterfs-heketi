@@ -57,11 +57,11 @@ spec:
           value: "/var/log/glusterfs/gluster-block"
         resources:
           limits:
-            cpu: <vars.gluster.limits.cpu>
-            memory: <vars.gluster.limits.memory>
+            <if(vars.gluster.limits.cpu)>cpu: <vars.gluster.limits.cpu><endif>
+            <if(vars.gluster.limits.memory)>memory: <vars.gluster.limits.memory><endif>
           requests:
-            cpu: <vars.gluster.requests.cpu>
-            memory: <vars.gluster.requests.memory>
+            <if(vars.gluster.requests.cpu)>cpu: <vars.gluster.requests.cpu><endif>
+            <if(vars.gluster.requests.memory)>memory: <vars.gluster.requests.memory><endif>
         volumeMounts:
         - name: glusterfs-heketi
           mountPath: "/var/lib/heketi"
