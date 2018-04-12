@@ -8,17 +8,14 @@
  * vars.heketi.requests.cpu
  * vars.heketi.requests.memory
  * vars.heketi.snapshot.limit
-* vars.heketi.limits.cpu
-* vars.heketi.limits.memory
-* vars.heketi.requests.cpu
-* vars.heketi.requests.memory
+ * vars.heketi.limits.cpu
+ * vars.heketi.limits.memory
+ * vars.heketi.requests.cpu
+ * vars.heketi.requests.memory
  * 
  * Optional
  * 
  * vars.heketi.allowOnMaster
- * vars.heketi.affinity.key
- * vars.heketi.affinity.name
- * vars.heketi.affinity.required
  * vars.heketi.tolerations[].effect
  * vars.heketi.tolerations[].key
  * vars.heketi.tolerations[].value
@@ -127,9 +124,6 @@ spec:
         <tolerationMasterEntry(parent, vars, vars.heketi.allowOnMaster)>
 <if(vars.heketi.tolerations)>
         <tolerationsEntry(parent, vars, vars.heketi.tolerations)>
-<endif>
-<if(vars.heketi.affinity)>
-      <affinitiesGroup(parent, vars, vars.heketi.affinity)>
 <endif>
 
 >>

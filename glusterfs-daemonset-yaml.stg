@@ -11,15 +11,11 @@
  * Optional
  * 
  * vars.gluster.allowOnMaster
- * vars.gluster.affinity.key
- * vars.gluster.affinity.name
- * vars.gluster.affinity.required
  * vars.gluster.tolerations[].effect
  * vars.gluster.tolerations[].key
  * vars.gluster.tolerations[].value
  */
 
-import "_affinities.stg"
 import "_tolerations.stg"
 
 glusterfs-daemonset-yaml(parent, vars) ::= <<
@@ -151,9 +147,6 @@ spec:
         <tolerationMasterEntry(parent, vars, vars.gluster.allowOnMaster)>
 <if(vars.gluster.tolerations)>
         <tolerationsEntry(parent, vars, vars.gluster.tolerations)>
-<endif>
-<if(vars.gluster.affinity)>
-      <affinitiesGroup(parent, vars, vars.gluster.affinity)>
 <endif>
 
 >>

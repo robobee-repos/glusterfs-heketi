@@ -12,15 +12,11 @@
  * Optional
  * 
  * vars.heketi.allowOnMaster
- * vars.heketi.affinity.key
- * vars.heketi.affinity.name
- * vars.heketi.affinity.required
  * vars.heketi.tolerations[].effect
  * vars.heketi.tolerations[].key
  * vars.heketi.tolerations[].value
  */
 
-import "_affinities.stg"
 import "_tolerations.stg"
 
 deploy-heketi-deployment-yaml(parent, vars) ::= <<
@@ -121,9 +117,6 @@ spec:
         <tolerationMasterEntry(parent, vars, vars.heketi.allowOnMaster)>
 <if(vars.heketi.tolerations)>
         <tolerationsEntry(parent, vars, vars.heketi.tolerations)>
-<endif>
-<if(vars.heketi.affinity)>
-      <affinitiesGroup(parent, vars, vars.heketi.affinity)>
 <endif>
 
 >>
