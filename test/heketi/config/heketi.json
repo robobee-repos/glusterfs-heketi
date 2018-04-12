@@ -1,0 +1,15 @@
+{
+  "port": "8080",
+  "use_auth": false,
+  "glusterfs": {
+    "executor": "mock",
+    "sshexec": {
+      "keyfile": "/etc/heketi/private_key",
+      "user": "sshuser"
+    },
+    "db": "/var/lib/heketi/heketi.db",
+    "monitor_gluster_nodes": true,
+    "refresh_time_monitor_gluster_nodes": 120,
+    "start_time_monitor_gluster_nodes": 10
+  }
+}
