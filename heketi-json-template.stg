@@ -5,7 +5,7 @@
  * vars.service.minBrickSizeGb
  */
 
-heketi-json-template-yaml(parent, vars) ::= <<
+heketi-json-template(parent, vars) ::= <<
 {
   "_port_comment": "Heketi Server Port Number",
   "port" : "8080",
