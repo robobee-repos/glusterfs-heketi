@@ -37,6 +37,7 @@ metadata:
   annotations:
     description: Exposes Heketi Service
 spec:
+  clusterIP: <parent.heketiServiceClusterAddress>
   selector:
     glusterfs: heketi-pod
   ports:
