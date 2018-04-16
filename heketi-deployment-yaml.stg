@@ -70,12 +70,16 @@ spec:
         imagePullPolicy: IfNotPresent
         name: heketi
         resources:
+<if(vars.heketi.limits)>
           limits:
             <if(vars.heketi.limits.cpu)>cpu: <vars.heketi.limits.cpu><endif>
             <if(vars.heketi.limits.memory)>memory: <vars.heketi.limits.memory><endif>
+<endif>
+<if(vars.heketi.requests)>
           requests:
             <if(vars.heketi.requests.cpu)>cpu: <vars.heketi.requests.cpu><endif>
             <if(vars.heketi.requests.memory)>memory: <vars.heketi.requests.memory><endif>
+<endif>
         env:
         - name: HEKETI_USER_KEY
           value: ${HEKETI_USER_KEY}
