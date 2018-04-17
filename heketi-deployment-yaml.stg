@@ -12,6 +12,7 @@
  * vars.heketi.limits.memory
  * vars.heketi.requests.cpu
  * vars.heketi.requests.memory
+ * vars.heketi.clusterIP
  * 
  * Optional
  * 
@@ -37,7 +38,7 @@ metadata:
   annotations:
     description: Exposes Heketi Service
 spec:
-  clusterIP: <parent.heketiServiceClusterAddress>
+  clusterIP: <vars.heketi.clusterIP>
   selector:
     glusterfs: heketi-pod
   ports:
